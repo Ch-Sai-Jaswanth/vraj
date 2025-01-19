@@ -1,33 +1,3 @@
-/* import React, { useEffect } from 'react';
-import '../styles/BarGraph.css';
-
-const BarGraph = ({ array }) => {
-  useEffect(() => {
-    const bars = document.querySelectorAll('.bar');
-    bars.forEach((bar, index) => {
-      bar.style.height = `${(array[index] / Math.max(...array)) * 100}%`;
-    });
-  }, [array]);
-
-  return (
-    <div className="bar-graph">
-      {array.map((value, index) => (
-        <div
-          key={index}
-          className="bar"
-          style={{
-            width: `${100 / array.length}%`,
-            backgroundColor: '#4CAF50',
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
-export default BarGraph;
- */
-
 import React from 'react';
 import '../styles/BarGraph.css';
 
