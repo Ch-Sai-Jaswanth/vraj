@@ -16,6 +16,9 @@ const ControlPanel = ({
   const [arraySize, setArraySize] = useState(array.length);
   const [userArrays, setUserArrays] = useState([]);
   const [selectedArrayIndex, setSelectedArrayIndex] = useState(-1);
+  const [selectedAlgorithm1, setSelectedAlgorithm1] = useState('bubbleSort');
+  const [selectedAlgorithm2, setSelectedAlgorithm2] = useState('quickSort');
+  const [comparisonResult, setComparisonResult] = useState('');
 
   useEffect(() => {
     const storedArrays = localStorage.getItem(`${username}_arrays`);
@@ -47,6 +50,7 @@ const ControlPanel = ({
     setArray(userArrays[index]);
     setArraySize(userArrays[index].length);
   };
+
   const handleArrayDelete = (index) => {
     const updatedArrays = [...userArrays];
     updatedArrays.splice(index, 1);
@@ -56,7 +60,32 @@ const ControlPanel = ({
       setSelectedArrayIndex(-1);
     }
   };
+
+  const compareAlgorithms = (algorithm1, algorithm2) => {
+    const array1 = [...array];
+    const array2 = [...array];
   
+    const startTime1 = performance.now();
+    handleSorting(array1, algorithm1);
+    const endTime1 = performance.now();
+  
+    const startTime2 = performance.now();
+    handleSorting(array2, algorithm2);
+    const endTime2 = performance.now();
+  
+    const time1 = endTime1 - startTime1;
+    const time2 = endTime2 - startTime2;
+    let result;
+    if (time1 < time2) {
+      result = `${algorithm1} is faster than ${algorithm2} for the given array`;
+    } else if (time1 > time2) {
+      result = `${algorithm2} is faster than ${algorithm1} for the given array`;
+    } else {
+      result = `${algorithm1} and ${algorithm2} have the same performance`;
+    }
+  
+    setComparisonResult(result);
+  };
 
   return (
     <div className="control-panel">
@@ -101,39 +130,77 @@ const ControlPanel = ({
             onClick={() => handleArrayDelete(selectedArrayIndex)}
           >🗑️</button>
         )}
-        </div>
-        <div className="input-group">
-          <label htmlFor="sorting-algorithm">Sorting Algorithm:</label>
-          <select
-            id="sorting-algorithm"
-            value={sortingAlgorithm}
-            onChange={(e) => handleAlgorithmChange(e.target.value)}
-          >
-            <option value="bubbleSort">Bubble Sort</option>
-            <option value="quickSort">Quick Sort</option>
-            <option value="mergeSort">Merge Sort</option>
-            <option value="insertionSort">Insertion Sort</option>
-            <option value="selectionSort">Selection Sort</option>
-          </select>
-        </div>
-        <div className="input-group">
-          <label htmlFor="sorting-speed">Sorting Speed:</label>
-          <input
-            type="range"
-            id="sorting-speed"
-            min="100"
-            max="1000"
-            step="100"
-            value={sortingSpeed}
-            onChange={(e) => handleSpeedChange(e.target.value)}
-          />
-          <span>{sortingSpeed} ms</span>
-        </div>
-        <button onClick={handleSorting} disabled={isSorting}>
-          {isSorting ? 'Sorting...' : 'Start Sorting'}
-        </button>
       </div>
-    );
-  };
-  
-  export default ControlPanel;
+      <div className="input-group">
+        <label htmlFor="sorting-algorithm">Sorting Algorithm:</label>
+        <select
+          id="sorting-algorithm"
+          value={sortingAlgorithm}
+          onChange={(e) => handleAlgorithmChange(e.target.value)}
+        >
+          <option value="bubbleSort">Bubble Sort</option>
+          <option value="quickSort">Quick Sort</option>
+          <option value="mergeSort">Merge Sort</option>
+          <option value="insertionSort">Insertion Sort</option>
+          <option value="selectionSort">Selection Sort</option>
+        </select>
+      </div>
+      <div className="input-group">
+        <label htmlFor="sorting-speed">Sorting Speed:</label>
+        <input
+          type="range"
+          id="sorting-speed"
+          min="100"
+          max="1000"
+          step="100"
+          value={sortingSpeed}
+          onChange={(e) => handleSpeedChange(e.target.value)}
+        />
+        <span>{sortingSpeed} ms</span>
+      </div>
+      <button onClick={handleSorting} disabled={isSorting}>
+        {isSorting ? 'Sorting...' : 'Start Sorting'}
+      </button>
+      <div className="input-group">
+        <label htmlFor="sorting-algorithm-1">Sorting Algorithm 1:</label>
+        <select
+          id="sorting-algorithm-1"
+          value={selectedAlgorithm1}
+          onChange={(e) => setSelectedAlgorithm1(e.target.value)}
+        >
+          <option value="bubbleSort">Bubble Sort</option>
+          <option value="quickSort">Quick Sort</option>
+          <option value="mergeSort">Merge Sort</option>
+          <option value="insertionSort">Insertion Sort</option>
+          <option value="selectionSort">Selection Sort</option>
+        </select>
+      </div>
+      <div className="input-group">
+        <label htmlFor="sorting-algorithm-2">Sorting Algorithm 2:</label>
+        <select
+          id="sorting-algorithm-2"
+          value={selectedAlgorithm2}
+          onChange={(e) => setSelectedAlgorithm2(e.target.value)}
+        >
+          <option value="bubbleSort">Bubble Sort</option>
+          <option value="quickSort">Quick Sort</option>
+          <option value="mergeSort">Merge Sort</option>
+          <option value="insertionSort">Insertion Sort</option>
+          <option value="selectionSort">Selection Sort</option>
+        </select>
+      </div>
+      <button onClick={() => compareAlgorithms(selectedAlgorithm1, selectedAlgorithm2)}>
+        Compare Algorithms
+      </button>
+
+      {comparisonResult && (
+        <div className="comparison-result">
+          <h3>Performance Comparison:</h3>
+          <p>{comparisonResult}</p>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ControlPanel;
