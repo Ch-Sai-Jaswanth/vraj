@@ -109,16 +109,33 @@ const BarGraph = ({ array, sortingAlgorithm }) => {
       <div className="algorithm-info">
         {getAlgorithmInfo(sortingAlgorithm)}
       </div>
-      {array.map((value, index) => (
-        <div
-          key={index}
-          className="bar"
+        {array.map((value, index) => (
+      <div
+        key={index}
+        className="bar"
+        style={{
+          height: `${(value / Math.max(...array)) * 100}%`,
+          width: `${100 / array.length}%`,
+          position: 'relative',
+        }}
+      >
+        <span
           style={{
-            height: `${(value / Math.max(...array)) * 100}%`,
-            width: `${100 / array.length}%`,
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            color: 'black',
+            fontSize: '18px',
+            fontWeight: 'bold',
           }}
-        />
-      ))}
+    >
+      {value}
+    </span>
+  </div>
+))}
+
+
     </div>
   );
 };
