@@ -13,9 +13,7 @@ function RefreshHandler({ setIsAuth }) {
         }
     }, [location, navigate, setIsAuth]);
   return (
-    <div>
-      
-    </div>
+    <></>
   )
 }
 

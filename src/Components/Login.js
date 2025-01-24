@@ -37,13 +37,13 @@ const Login = () => {
           body: JSON.stringify(loginInfo)
         });
         const result = await response.json();
-        //console.log(result);
         
-        const { success, message, jwtToken, name, error } = result;
+        const { success, message, jwToken, name, error } = result;
         if(success) {
           handleSuccess(message);
-          localStorage.setItem('token', jwtToken);
+          localStorage.setItem('token', jwToken);
           localStorage.setItem('loggedInUser', name);
+          console.log(jwToken);
           setTimeout(() => {
             navigate('/home');
           }, 1000);
@@ -55,7 +55,7 @@ const Login = () => {
         else if(!success) {
           handleError(message);
         }
-        console.log(result);
+        //console.log(result);
       }   catch (error) {
             handleError(error);
     }
@@ -65,11 +65,11 @@ const Login = () => {
     <div className='container'>
       <h1>Login</h1>
       <form onSubmit={handleLogin}>
-        <div>
+        <div className='form-group'>
           <label htmlFor='email'>Email</label>
           <input onChange={handleChange} type='email' name='email' autoFocus placeholder='Enter your email...' value={loginInfo.email}/>
         </div>
-        <div>
+        <div className='form-group'>
           <label htmlFor='password'>Password</label>
           <input onChange={handleChange} type='password' name='password' placeholder='Enter your password...' value={loginInfo.password} />
         </div>

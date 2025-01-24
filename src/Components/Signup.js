@@ -62,15 +62,15 @@ const Signup = () => {
     <div className='container'>
       <h1>SignUp</h1>
       <form onSubmit={handleSignup}>
-        <div>
+        <div className='form-group'>
           <label htmlFor='name'>Name</label>
           <input onChange={handleChange} type='text' name='name' autoFocus placeholder='Enter your name...' value={signupInfo.name} />
         </div>
-        <div>
+        <div className='form-group'>
           <label htmlFor='email'>Email</label>
           <input onChange={handleChange} type='email' name='email' autoFocus placeholder='Enter your email...' value={signupInfo.email}/>
         </div>
-        <div>
+        <div className='form-group'>
           <label htmlFor='password'>Password</label>
           <input onChange={handleChange} type='password' name='password' placeholder='Enter your password...' value={signupInfo.password} />
         </div>
