@@ -69,7 +69,7 @@ export const bubbleSort = async (array, setArray, sortingSpeed, onComplete) => {
     setArray(sortedArray);
     onComplete();
     return sortedArray;
-  };  
+  };
   
   const merge = async (left, right, setArray, sortingSpeed) => {
     let result = [];
@@ -84,13 +84,13 @@ export const bubbleSort = async (array, setArray, sortingSpeed, onComplete) => {
         result.push(right[rightIndex]);
         rightIndex++;
       }
-      setArray([...result]);
-      await new Promise((resolve) => setTimeout(resolve, sortingSpeed));
     }
   
-    return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
-  };
-  
+    result = result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+    setArray([...result]);
+    await new Promise((resolve) => setTimeout(resolve, sortingSpeed));
+    return result;
+  };  
   
   export const insertionSort = async (array, setArray, sortingSpeed, onComplete) => {
     const newArray = [...array];

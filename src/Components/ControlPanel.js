@@ -95,6 +95,7 @@ const ControlPanel = ({
           type="text"
           id="array-input"
           value={arrayInput}
+          placeholder='Enter comma separated values'
           onChange={(e) => handleArrayInput(e.target.value)}
         />
         <button onClick={handleSubmit}>Submit</button>
