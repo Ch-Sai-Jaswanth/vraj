@@ -1,7 +1,8 @@
 .control-panel {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   gap: 20px;
   margin-bottom: 40px;
@@ -12,19 +13,20 @@
 }
 
 .input-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex: 1 1 calc(33.333% - 16px);
+  box-sizing: border-box;
+  text-align: center;
   gap: 5px;
   width: 100%;
   max-width: 400px;
+  margin: 5px;
 }
 
 .input-group label {
   font-size: 14px;
   font-weight: bold;
   color: #333;
-  margin-bottom: 5px;
+  margin-left: 5px;
 }
 
 .input-group input,
@@ -36,6 +38,7 @@
   border-radius: 6px;
   background-color: #f9f9f9;
   transition: all 0.3s ease;
+  margin-right: 10px;
 }
 
 .input-group input:focus,
@@ -44,6 +47,14 @@
   border-color: #4CAF50;
   background-color: #fff;
   box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.input-group button:nth-child(1){
+  margin-left: 150px;
+}
+
+.input-group button.compare-button {
+  margin-left: 125px;
 }
 
 button {
@@ -55,7 +66,6 @@ button {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {

@@ -117,7 +117,7 @@ const ControlPanel = ({
           value={selectedArrayIndex}
           onChange={(e) => handleArraySelect(parseInt(e.target.value))}
         >
-          <option value="-1">Select a previous array</option>
+          <option value="0">Select a previous array</option>
           {userArrays.map((arr, index) => (
             <option key={index} value={index}>
               [{arr.join(', ')}]
@@ -158,9 +158,11 @@ const ControlPanel = ({
         />
         <span>{sortingSpeed} ms</span>
       </div>
-      <button onClick={handleSorting} disabled={isSorting}>
-        {isSorting ? 'Sorting...' : 'Start Sorting'}
-      </button>
+      <div className="input-group">
+        <button onClick={handleSorting} disabled={isSorting}>
+          {isSorting ? 'Sorting...' : 'Start Sorting'}
+        </button>
+      </div>
       <div className="input-group">
         <label htmlFor="sorting-algorithm-1">Sorting Algorithm 1:</label>
         <select
@@ -189,9 +191,11 @@ const ControlPanel = ({
           <option value="selectionSort">Selection Sort</option>
         </select>
       </div>
-      <button onClick={() => compareAlgorithms(selectedAlgorithm1, selectedAlgorithm2)}>
-        Compare Algorithms
-      </button>
+      <div className="input-group">
+        <button className="compare-button" onClick={() => compareAlgorithms(selectedAlgorithm1, selectedAlgorithm2)}>
+          Compare Algorithms
+        </button>
+      </div>
 
       {comparisonResult && (
         <div className="comparison-result">
