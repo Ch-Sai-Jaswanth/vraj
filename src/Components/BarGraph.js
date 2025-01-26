@@ -126,7 +126,7 @@ const BarGraph = ({ array, sortingAlgorithm }) => {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             color: 'black',
-            fontSize: '18px',
+            fontSize: `${60 / Math.sqrt(array.length)}px`,
             fontWeight: 'bold',
           }}
     >

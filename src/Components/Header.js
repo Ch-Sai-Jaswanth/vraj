@@ -15,7 +15,7 @@ const Header = ({ loggedInUser, handleLogout }) => {
       <div className="header-login">
         {loggedInUser && (
           <div className="logged-in-user">
-            <span>{loggedInUser}</span>
+            <span>Welcome, {loggedInUser}</span>
             <button className="logout-button" onClick={handleLogout}>
               Logout
             </button>

@@ -61,5 +61,7 @@
 }
 
 .logged-in-user span {
-  margin-right: 1rem;
+  margin-right: 2rem;
+  font-family: Sans-serif;
+  font-weight: bold;
 }
