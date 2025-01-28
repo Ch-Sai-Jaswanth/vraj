@@ -68,7 +68,7 @@ const Signup = () => {
         </div>
         <div className='form-group'>
           <label htmlFor='email'>Email</label>
-          <input onChange={handleChange} type='email' name='email' autoFocus placeholder='Enter your email...' value={signupInfo.email}/>
+          <input onChange={handleChange} type='email' name='email' autoComplete='off' placeholder='Enter your email...' value={signupInfo.email}/>
         </div>
         <div className='form-group'>
           <label htmlFor='password'>Password</label>

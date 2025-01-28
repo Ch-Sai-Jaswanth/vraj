@@ -18,8 +18,18 @@ function App() {
         <RefreshHandler setIsAuth={setIsAuth}/>
         <Routes>
           <Route path='/' element={<Header />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={
+            <>
+              <Header />
+              <Login />
+            </>
+          } />
+          <Route path='/signup' element={
+            <>
+              <Header />
+              <Signup />
+            </>
+          } />
           <Route path='/home' element={<PrivateRoute element={<Original />} />} />
         </Routes>
       </div>

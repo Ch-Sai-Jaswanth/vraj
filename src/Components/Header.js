@@ -9,6 +9,10 @@ const Header = ({ loggedInUser, handleLogout }) => {
     Navigate('/login');
   };
 
+  const handleSignupClick = () => {
+    Navigate('/signup');
+  };
+
   return (
     <div className="header-container">
       <div className="header-title">SORTIFY - Interactive Sorting Visualizer</div>
@@ -24,6 +28,11 @@ const Header = ({ loggedInUser, handleLogout }) => {
         {!loggedInUser && (
           <button className="login-button" onClick={handleLoginClick}>
             Login
+          </button>
+        )}
+        {!loggedInUser && (
+          <button className="login-button" onClick={handleSignupClick}>
+            Signup
           </button>
         )}
       </div>

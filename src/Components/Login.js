@@ -67,7 +67,7 @@ const Login = () => {
       <form onSubmit={handleLogin}>
         <div className='form-group'>
           <label htmlFor='email'>Email</label>
-          <input onChange={handleChange} type='email' name='email' autoFocus placeholder='Enter your email...' value={loginInfo.email}/>
+          <input onChange={handleChange} type='email' name='email' autoFocus placeholder='Enter your email...' autoComplete='off' value={loginInfo.email}/>
         </div>
         <div className='form-group'>
           <label htmlFor='password'>Password</label>
