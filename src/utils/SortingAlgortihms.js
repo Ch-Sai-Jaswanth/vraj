@@ -123,3 +123,74 @@ export const bubbleSort = async (array, setArray, sortingSpeed, onComplete) => {
   }
   onComplete();
 };
+
+export const heapSort = async (array, setArray, sortingSpeed, onComplete) => {
+  const newArray = [...array];
+  const n = newArray.length;
+  
+  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      await heapify(newArray, n, i, setArray, sortingSpeed);
+  }
+  
+  for (let i = n - 1; i > 0; i--) {
+      [newArray[0], newArray[i]] = [newArray[i], newArray[0]];
+      setArray([...newArray]);
+      await new Promise((resolve) => setTimeout(resolve, sortingSpeed));
+      await heapify(newArray, i, 0, setArray, sortingSpeed);
+  }
+  onComplete();
+};
+
+const heapify = async (arr, n, i, setArray, sortingSpeed) => {
+  let largest = i;
+  let left = 2 * i + 1;
+  let right = 2 * i + 2;
+  
+  if (left < n && arr[left] > arr[largest]) largest = left;
+  if (right < n && arr[right] > arr[largest]) largest = right;
+  
+  if (largest !== i) {
+      [arr[i], arr[largest]] = [arr[largest], arr[i]];
+      setArray([...arr]);
+      await new Promise((resolve) => setTimeout(resolve, sortingSpeed));
+      await heapify(arr, n, largest, setArray, sortingSpeed);
+  }
+};
+
+export const radixSort = async (array, setArray, sortingSpeed, onComplete) => {
+  const newArray = [...array];
+  const maxNum = Math.max(...newArray);
+  let exp = 1;
+  
+  while (Math.floor(maxNum / exp) > 0) {
+      await countingSortByDigit(newArray, exp, setArray, sortingSpeed);
+      exp *= 10;
+  }
+  onComplete();
+};
+
+const countingSortByDigit = async (array, exp, setArray, sortingSpeed) => {
+  const output = new Array(array.length).fill(0);
+  const count = new Array(10).fill(0);
+  
+  for (let i = 0; i < array.length; i++) {
+      count[Math.floor(array[i] / exp) % 10]++;
+  }
+  
+  for (let i = 1; i < 10; i++) {
+      count[i] += count[i - 1];
+  }
+  
+  for (let i = array.length - 1; i >= 0; i--) {
+      output[count[Math.floor(array[i] / exp) % 10] - 1] = array[i];
+      count[Math.floor(array[i] / exp) % 10]--;
+  }
+  
+  for (let i = 0; i < array.length; i++) {
+      array[i] = output[i];
+  }
+  
+  setArray([...array]);
+  await new Promise((resolve) => setTimeout(resolve, sortingSpeed));
+};
+
